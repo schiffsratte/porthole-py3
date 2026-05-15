@@ -2,7 +2,7 @@
 20260515-r1:
    * Update for python3.12. 
    * Remove some obsolete functions and correction of python2 leftovers
-   * 
+   * changed install method to pip as setup.py is deprecated - added pyproject.toml
 
 0.7.x python3 
 

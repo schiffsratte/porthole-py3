@@ -1,6 +1,29 @@
 Porthole 20260515-r1
 ====================
 
+===========================================
+= How to install this version of Porthole =
+===========================================
+
+You can't use the ebuild (as it's for another version), you must install it yourself with pip.
+
+Porthole requires:
+>=python-3.12
+PyGObject with GTK 3
+VTE and GtkSourceView introspection packages
+gentoolkit
+and, of course, Portage
+
+to install:
+> python3.12 -m pip install .
+
+For a systemwide install:
+> sudo python3.12 -m pip install .
+
+====================
+Original README
+====================
+
 Porthole is a GTK-based frontend for Portage (the Gentoo package
 management system, http://www.gentoo.org/). It features a hierarchial
 view of packages and supports fast searches and dependency
