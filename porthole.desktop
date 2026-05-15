@@ -13,4 +13,4 @@ Exec=/usr/bin/porthole
 Icon=/usr/share/pixmaps/porthole-icon.png
 Terminal=false
 StartupNotify=true
-Categories=Settings;PackageManager;GTK;
+Categories=Development;Utility;Settings;PackageManager;

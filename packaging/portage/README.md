@@ -39,24 +39,35 @@ masters = gentoo
 auto-sync = no
 ```
 
-Then create/update the Manifest and install:
-
-```sh
-cd packaging/portage/overlay/app-portage/porthole
-ebuild porthole-20260515-r1.ebuild manifest
-sudo emerge -av app-portage/porthole
-```
-
-If Portage reports that `python_targets_python3_12` is missing, install the
-package.use example:
+Install the package.use example:
 
 ```sh
 sudo install -Dm0644 packaging/portage/package.use/porthole \
     /etc/portage/package.use/porthole
 ```
 
-or if you still have an package.use file do as root 
+Create/update the Manifest from the same distfile that Portage will use, then
+install:
 
 ```sh
- echo app-portage/porthole python_targets_python3_12 >> /etc/portage/package.use
- ```
+cd packaging/portage/overlay/app-portage/porthole
+DISTDIR=/var/cache/distfiles ebuild --force porthole-20260515-r1.ebuild manifest
+sudo emerge -av app-portage/porthole
+```
+
+If you generated the distfile as a normal user, copy it first and then refresh
+the Manifest:
+
+```sh
+sudo install -Dm0644 /tmp/porthole-distfiles/porthole-20260515.tar.gz \
+    /var/cache/distfiles/porthole-20260515.tar.gz
+cd packaging/portage/overlay/app-portage/porthole
+sudo DISTDIR=/var/cache/distfiles ebuild --force porthole-20260515-r1.ebuild manifest
+```
+
+If Portage still reports a BLAKE2B mismatch, remove the stale distfile and
+repeat the distfile and Manifest steps:
+
+```sh
+sudo rm -f /var/cache/distfiles/porthole-20260515.tar.gz
+```

@@ -35,7 +35,14 @@ tar \
     -C "${ROOT_DIR}" \
     -cf - . | tar -C "${tmpdir}/${PN}-${PV}" -xf -
 
-tar -C "${tmpdir}" -czf "${OUT}" "${PN}-${PV}"
+tar \
+    --sort=name \
+    --mtime='UTC 2026-05-15' \
+    --owner=0 \
+    --group=0 \
+    --numeric-owner \
+    -C "${tmpdir}" \
+    -cf - "${PN}-${PV}" | gzip -n > "${OUT}"
 
 echo "Created ${OUT}"
 if [ "${DISTDIR}" != "/var/cache/distfiles" ]; then
