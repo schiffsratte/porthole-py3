@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3.12
 
 '''
     Porthole
@@ -63,12 +63,12 @@ def usage():
 if __name__ == "__main__":
 
     try:
-        #opts, args = getopt(sys.argv[1:], 'lvd:b:hnu:', ["local", "version", "debug=",
-        #                                      "backend=", "help", "no-priveledges", "user=", "path="])
-        opts, args = getopt(sys.argv[1:], 'lvd:b:h', ["local", "version", "debug=",
-                                              "backend=", "help", "path="])
-        #print(opts
-        #print(args
+        opts, args = getopt(sys.argv[1:], 'lvd:b:hnu:', ["local", "version", "debug=",
+                                            "backend=", "help", "no-privileges", "user=", "path="])
+        #
+        #opts, args = getopt(sys.argv[1:], 'lvd:b:h', ["local", "version", "debug=", "backend=", "help", "path="])
+        print(opts)
+        print(args)
     except GetoptError as e:
         print(e.msg, file=sys.stderr)
         usage()
@@ -98,7 +98,7 @@ if __name__ == "__main__":
         if opt in ("-l", "--local"):
             # running a local version (i.e. not installed in /usr/*)
             print("importing local modules")
-            #print(sys.path)
+            print(sys.path)
             import os
             #print("dir = ", os.path.dirname(
                 #os.path.dirname(os.path.abspath(__file__))))

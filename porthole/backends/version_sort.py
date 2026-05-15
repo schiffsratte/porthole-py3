@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     # setup our path so we can load our custom modules
     from sys import path
-    path.append('/home/brian/dev/git/porthole')
+    path.append('/home/jens/.local/porthole')
 
 import re
 

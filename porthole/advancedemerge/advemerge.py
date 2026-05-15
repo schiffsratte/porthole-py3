@@ -458,7 +458,7 @@ class AdvancedEmergeDialog:
                     # check to see if the ebuild is keyword unmasked,
                     if verInfo["stable"] and self.arch not in verInfo["keywords"]:
                         # i.e. "~arch" is in keywords, not "arch" => must be unmasked
-                        # so: re-mask it (for use with package.keywords button)
+                        # so: re-mask it (for use with package.accept_keywords button)
                         return "-~" + self.arch
                     keyword = ''
                 if verInfo["stable"] and keyword in backends.portage_lib.settings.settings["ACCEPT_KEYWORDS"]: return ''

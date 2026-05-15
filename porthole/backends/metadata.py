@@ -33,8 +33,8 @@ from os.path import exists
 from gettext import gettext as _
 
 # precompile regexps
-re1 = compile("^\s+|\s+$")
-re2 = compile("\s+")
+re1 = compile(r"^\s+|\s+$")
+re2 = compile(r"\s+")
 
 #Define constants for the two states we care about
 ALLOW_CONTENT = 1

@@ -40,14 +40,14 @@ latest version of a package and you don't care if this particular
 package is unstable or not. If there is a newer version of a package
 that is marked as unstable for your CPU architecture, you can
 right-click on the package and select "Add with ~arch to
-package.keywords" where "arch" is an abbreviation for your CPU
+package.accept_keywords" where "arch" is an abbreviation for your CPU
 architecture. This will enable you to install the latest unstable
 version of this package every time a new version appears inthe portage
 tree, just as you would install a package normally.</p>
 <p>Please note that Porthole is not well tested and there is the
 possibility that it will chew up. mutilate, or otherwise render useless
-your current package.keywords file. It is recommended that you make a
-backup of this file (usually /etc/portage/package.keywords) before
+your current package.accept_keywords file. It is recommended that you make a
+backup of this file (usually /etc/portage/package.accept_keywords) before
 accepting keywords with Porthole. Of course, if you haven't edited it
 yourself, chances are it's empty to start off with anyway :).</p>
 <h2>Advanced Install</h2>
@@ -63,7 +63,7 @@ yourself, and unmask only that version if need be, you can quickly and
 easily do this by right-clicking on the version table in the package
 summary (displayed in the bottom pane of the main window).</p>
 <p>If you click on a keyword masked version of the package, it will
-allow you to modify package.keywords as described above. In addition
+allow you to modify package.accept_keywords as described above. In addition
 however, if you click on a hard masked package, it will allow you to
 add it to your package.unmask file, and thus emerge it. Before you
 unmask a hard masked package, <span style="font-weight: bold;">always</span>

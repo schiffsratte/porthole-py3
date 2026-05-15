@@ -159,6 +159,7 @@ def set_user_config(filename, name='', ebuild='', comment = '',
     something in remove are removed, and items in <add> are added
     as new lines.
     """
+
     dprint("SET_CONFIG: set_user_config(): filename = '%s'" % filename)
     dprint("SET_CONFIG: set_user_config(): add=%s, remove=%s, delete=%s"
         %(str(add), str(remove), str(delete)))
@@ -202,7 +203,7 @@ def set_user_config(filename, name='', ebuild='', comment = '',
             dprint("SET_CONFIG: removed line '%s'" % ' '.join(line))
             done = True
     if not done: # it did not find a matching line to modify
-        if "package.use" in filename or "package.keywords" in filename:
+        if "package.use" in filename or "package.accept_keywords" in filename:
             if add:
                 config.append([name] + add)
                 dprint("SET_CONFIG: added line '%s'" % ' '.join(config[-1]))
@@ -238,20 +239,7 @@ def set_user_config(filename, name='', ebuild='', comment = '',
 def set_package_mask(filename, name='', ebuild='', comment='', username='', add=[], remove=[]):
     """routine to handle adding/removing entries in package.mask files which should have multple lines to add/delete"""
     dprint("SET_CONFIG:  set_package_mask(): filename = '%s'" % filename)
-    if not chk_permission(filename):
-        return False
-    #dprint(" * SET_CONFIG: set_package_mask(): filename = " + filename)
-    configlines =  get_configlines(filename, username)
-    # fixme unused groups
-    groups = group_by_blanklines(configlines)
-
-    # do some more stuff
-
-    configtext = '\n'.join(configlines)
-    configfile = open(filename, 'w')
-    configfile.write(configtext)
-    configfile.close()
-    return True
+    return set_user_config(filename, name, ebuild, comment, username, add, remove)
 
 def set_make_conf(_property, add=[], remove=[], replace=''):
     """
@@ -311,9 +299,9 @@ class MakeConf:
     And then modified and extended for porthole's use by Brian Dolbec
     """
     # define some re's
-    regex = {'USE': re.compile('USE\s*=\s*"([^"]*)"'),
-                    'PORTDIR_OVERLAY': re.compile('PORTDIR_OVERLAY\s*=\s*"([^"]*)"'),
-                    'PORTAGE_NICENESS': re.compile('PORTAGE_NICENESS\s*=\s*([0-9]*)\s*\n')
+    regex = {'USE': re.compile(r'USE\s*=\s*"([^"]*)"'),
+                    'PORTDIR_OVERLAY': re.compile(r'PORTDIR_OVERLAY\s*=\s*"([^"]*)"'),
+                    'PORTAGE_NICENESS': re.compile(r'PORTAGE_NICENESS\s*=\s*([0-9]*)\s*\n')
     }
 
     def __init__(self, path, config = None, overlays = None):
@@ -334,7 +322,7 @@ class MakeConf:
         """creates the property reg expression and saves it to
         the regex dictionary for use"""
         if not _property in self.regex:
-            self.regex[_property] = re.compile(('%s\s*=\s*"([^"]*)"') %_property)
+            self.regex[_property] = re.compile((r'%s\s*=\s*"([^"]*)"') %_property)
 
     def add_overlay(self, overlay):
         '''Add an overlay to make.conf.'''
@@ -402,15 +390,7 @@ class MakeConf:
 
     def write_overlay(self):
         '''  Write the list of registered overlays to /etc/make.conf.'''
-        def prio_sort(a, b):
-            '''Sort by priority.'''
-            if a.priority < b.priority:
-                return -1
-            elif a.priority > b.priority:
-                return 1
-            return 0
-
-        self.overlays.sort(prio_sort)
+        self.overlays.sort(key=lambda overlay: overlay.priority)
 
         paths = []
         for i in self.overlays:
@@ -549,7 +529,7 @@ if __name__ == "__main__":
             dprint("Debug printing is enabled")
         elif opt in ('-f'):
             filename = arg
-            dprint("file = %s" %_file)
+            dprint("file = %s" %filename)
         elif opt in ('-n'):
             name = arg
             dprint("name = %s" %name)
@@ -577,7 +557,7 @@ if __name__ == "__main__":
 
     if 'make.conf' in filename:
         set_make_conf(_property, add, remove, replace)
-    elif 'package.mask' in _file:
+    elif 'package.mask' in filename:
         set_package_mask(filename, name, ebuild, comment, username, add, remove)
     else:
         set_user_config(filename, name, ebuild, comment, username, add, remove)

@@ -1,4 +1,10 @@
 
+20260515-r1:
+   * Update for python3.12. 
+   * Remove some obsolete functions and correction of python2 leftovers
+   * 
+
+0.7.x python3 
 
 0.6.0:
     * Major slice and dice operation to split up the different files into more manageable modules.
@@ -69,7 +75,7 @@
      * Added select-all, de-select-all options to right-click menu for upgradable view
        (RFE [939337])
 
-     * Added code to interact with user config files such as package.keywords and make.conf.
+     * Added code to interact with user config files such as package.accept_keywords and make.conf.
        Added options to add or remove ebuilds or packages from certain config files in
        package list right-click, package summary right-click, and advemerge dialog.
        Added option to update use flags to make.conf or package.use in advemerge dialog.

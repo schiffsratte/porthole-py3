@@ -36,7 +36,6 @@ from porthole.utils.dispatcher import Dispatcher
 from porthole.views.packagebook.summary import Summary
 from porthole.views.depends import DependsView
 from porthole.views.highlight import HighlightView
-from porthole.views.changelog import ChangeLogView
 from porthole.views.useflags import UseFlagWidget
 from porthole.loaders.loaders import load_installed_files
 from porthole.backends.utilities import (
@@ -59,11 +58,6 @@ class PackageNotebook(object):
         self.plugin_package_tabs = plugin_package_tabs
         self.notebook = self.wtree.get_object("notebook")
         self.installed_window = self.wtree.get_object("installed_files_scrolled_window")
-        #self.changelog = self.wtree.get_object("changelog").get_buffer()
-        self.changelog_scrolledwindow = self.wtree.get_object('changelog_scrolled_window')
-        self.changelog = ChangeLogView()
-        self.changelog_scrolledwindow.add(self.changelog)
-        self.changelog_scrolledwindow.show_all()
         #
         self.installed_files = self.wtree.get_object("installed_files").get_buffer()
         #self.ebuild = self.wtree.get_object("ebuild").get_buffer()
@@ -100,7 +94,7 @@ class PackageNotebook(object):
     def reset_tabs(self):
         """set notebook tabs to load new package info"""
         debug.dprint("PackageNotebook reset_tabs()")
-        self.loaded = {"deps": False, "changelog": False, "installed": False, "ebuild": False}
+        self.loaded = {"deps": False, "installed": False, "ebuild": False}
         self.loaded_version= {"ebuild" : None, "installed": None, "deps": None}
 
     def notebook_changed(self, widget, pointer, index):
@@ -115,19 +109,13 @@ class PackageNotebook(object):
                 self.loaded["deps"] = True
                 self.loaded_version["deps"] = self.summary.ebuild
         elif index == 2:
-            if not self.loaded["changelog"]:
-                # fill in the change log
-                #load_textfile(self.changelog, package, "changelog")
-                self.changelog.update(self.summary.ebuild, True)
-                self.loaded["changelog"] = True
-        elif index == 3:
             debug.dprint("PackageNotebook notebook_changed(); load installed files for: " + str(self.summary.ebuild))
             if not self.loaded["installed"] or self.loaded_version["installed"] != self.summary.ebuild:
                 # load list of installed files
                 load_installed_files(self.installed_window, self.installed_files, package, self.summary.ebuild )
                 self.loaded["installed"] = True
                 self.loaded_version["installed"] = self.summary.ebuild
-        elif index == 4:
+        elif index == 3:
             debug.dprint("PackageNotebook notebook_changed(); self.summary.ebuild = " + str(self.summary.ebuild))
             if not self.loaded["ebuild"] or self.loaded_version["ebuild"] != self.summary.ebuild:
                 #load_textfile(self.ebuild, package, "best_ebuild")
@@ -135,7 +123,7 @@ class PackageNotebook(object):
                 self.ebuild.update(self.summary.ebuild, True)
                 self.loaded["ebuild"] = True
                 self.loaded_version["ebuild"] = self.summary.ebuild
-        elif index == 5:
+        elif index == 4:
             debug.dprint("PackageNotebook notebook_changed(); self.summary.ebuild = " + str(self.summary.ebuild))
             child = self.use_flag_page.get_child()
             if not child is None:
@@ -171,7 +159,6 @@ class PackageNotebook(object):
         debug.dprint("PackageNotebook clear_notebook()")
         self.summary.update_package_info(None)
         self.deps_view.clear()
-        self.changelog.set_text('')
         self.installed_files.set_text('')
         self.ebuild.set_text('')
 

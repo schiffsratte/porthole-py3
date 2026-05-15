@@ -25,6 +25,7 @@ import datetime
 _id = datetime.datetime.now().microsecond
 print("USERCONFIGS: id initialized to ", _id)
 
+from functools import cmp_to_key
 from gettext import gettext as _
 import os
 
@@ -45,7 +46,7 @@ from porthole.privilege import controller as privileges
 ## watch the user configs for changes and auto update
 
 CONFIG_TYPES = ['USE', 'KEYWORDS', 'MASK', 'UNMASK', 'SETS', 'PROVIDED']
-CONFIG_FILES = ['package.use', 'package.keywords', 'package.mask', 'package.unmask', 'sets', 'package.provided']
+CONFIG_FILES = ['package.use', 'package.accept_keywords', 'package.mask', 'package.unmask', 'sets', 'package.provided']
 
  # 'all' being a special atom to be replaced with no leading atom and no version info
 CONFIG_MASK_ATOMS = ['=',  '<', '>', '<=', '>=', 'all']
@@ -102,7 +103,7 @@ def cmp(a=None, b=None):
 class ConfigAtom:
     def __init__(self, name):
         self.name = name                        # pkg name
-        self.type = None                         # package.use, package.keywords, etc.
+        self.type = None                         # package.use, package.accept_keywords, etc.
         self.version = ''                          # specific version if defined
         self.atoms = ''                            # any atoms if defined
         self.value = []                              # any keywords, use flags, etc.
@@ -247,7 +248,7 @@ class UserConfigs:
     def get_user_config(self, mytype, name=None, ebuild=None):
         """
         Function for parsing package.use, package.mask, package.unmask
-        and package.keywords.
+        and package.accept_keywords.
 
         Returns /etc/portage/<file> as a dictionary of ebuilds, with
         dict[ebuild] = list of flags.
@@ -328,15 +329,13 @@ class UserConfigs:
         # no need to check which one, I think
         atom = self.get_atom(mytype, name, ebuild)
         if atom == None or atom == []: # get a target file
-            if add == '' and remove != '':
-                # then there is no need to create a new file entry
-                # this call was probably to check and remove
-                # an existing entry if it existed.
-                return True
             file = target = CONFIG_FILES[CONFIG_TYPES.index(mytype)]
             target_path = os.path.join(config_path, target)
             debug.dprint("USER_CONFIGS: set_user_config(): target_path = " +
                 target_path)
+            if add == '' and remove != '' and not os.path.exists(target_path):
+                # Nothing can be removed from a file that does not exist.
+                return True
             if os.path.isdir(target_path): # Then bring up a file selector dialog
                 #if parent_window == None:
                 #    parent_window = config.Mainwindow
@@ -367,7 +366,7 @@ class UserConfigs:
                 ebuild = "=" + ebuild
         #debug.dprint("USER_CONFIGS: set_user_config(): add: " +
             #"%s,\n remove: %s " %(add,remove))
-        if os.getuid == 0 or os.access(config_path, os.W_OK):
+        if os.getuid() == 0 or os.access(config_path, os.W_OK):
             add = add.split()
             remove = remove.split()
             debug.dprint("USER_CONFIGS: set_user_config(): add: " +
@@ -436,14 +435,14 @@ class UserConfigs:
         lines = read_bash(file)
         if lines:
             self.atomize(lines, file, temp_db, temp_sources)
-            temp_sources[mytype][file].sort(key=cmp)
+            temp_sources[mytype][file].sort(key=cmp_to_key(cmp))
             new_length = len(temp_sources[mytype][file])
         else:
             new_length = 0
         # get all atoms matching the correct file
         if file in self.sources[mytype]:
             old_file_atoms = self.sources[mytype][file]
-            old_file_atoms.sort(key=cmp)
+            old_file_atoms.sort(key=cmp_to_key(cmp))
         else:
             old_file_atoms =  []
         #old_length = len(old_file_atoms)

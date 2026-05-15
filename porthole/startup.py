@@ -197,7 +197,8 @@ def main():
     config.Config.load()
     config.Prefs.use_gladefile = "not assigned"
     # create the main window
-    MainWindow() #config.Prefs, config.Config)
+    MainWindow() 
+    #config.Prefs, config.Config)
     # start the program loop
     Gtk.main()
     # save the prefs to disk for next time

@@ -28,6 +28,7 @@ print("DATABASE: id initialized to ", _id)
 
 import os
 import pickle
+from pickle import UnpicklingError
 from gi.repository import GObject
 
 from porthole import backends
@@ -113,7 +114,8 @@ class Database(DBBase):
             _db = {'sync_date': sync_time, 'descriptions': self.descriptions}
             debug.dprint("DATABASE: save(); Pickling 'db' to file: " + self._DBFile)
             # pickle it baby, yeah!
-            pickle.dump(_db, open(self._DBFile, "w"))
+            with open(self._DBFile, "wb") as db_file:
+                pickle.dump(_db, db_file)
             del _db
 
     def load(self, filename = None):
@@ -122,12 +124,21 @@ class Database(DBBase):
         _db = None
         current, self.valid_sync = get_sync_info()
         if self.valid_sync and os.access(self._DBFile, os.F_OK):
-            _db = pickle.load(open(self._DBFile))
+            try:
+                with open(self._DBFile, "rb") as db_file:
+                    _db = pickle.load(db_file)
+            except (EOFError, UnpicklingError, OSError) as e:
+                debug.dprint("DATABASE: load(); invalid saved db '%s': %s" %
+                    (self._DBFile, str(e)))
+                return -1
         elif not self.valid_sync:
             debug.dprint("DATABASE: load(); Current portage tree did Not return a valid sync timestamp, not loading descriptions from the saved file" )
             return -1
         else:
             debug.dprint("DATABASE: load(); file does not exist :" + self._DBFile)
+            return -1
+        if not isinstance(_db, dict) or 'sync_date' not in _db or 'descriptions' not in _db:
+            debug.dprint("DATABASE: load(); saved db has invalid format")
             return -1
         if self.valid_sync and _db['sync_date'] != current:
             debug.dprint("DATABASE: load(); 'db' is out of date")
@@ -249,5 +260,3 @@ class Database(DBBase):
     def db_thread_cancell(self):
         if self.db_thread_running:
             self.db_thread.please_die()
-
-

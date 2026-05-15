@@ -341,8 +341,8 @@ msgid "<b>Package Options</b>"
 msgstr "<b>Tùy chọn gói</b>"
 
 #: porthole/glade/advemerge.glade.h:90
-msgid "Add the selected keyword to your package.keywords file. Changes will affect THIS VERSION only."
-msgstr "Thêm từ khoá bạn chọn vào tập tin package.keywords. Thay đổi chỉ tác động VỚI VERSION NÀY mà thôi."
+msgid "Add the selected keyword to your package.accept_keywords file. Changes will affect THIS VERSION only."
+msgstr "Thêm từ khoá bạn chọn vào tập tin package.accept_keywords. Thay đổi chỉ tác động VỚI VERSION NÀY mà thôi."
 
 #: porthole/glade/advemerge.glade.h:91
 msgid "Command Preview Window"
@@ -365,8 +365,8 @@ msgid "Update make.conf"
 msgstr "Cập nhật make.conf"
 
 #: porthole/glade/advemerge.glade.h:96
-msgid "Update package.keywords"
-msgstr "Cập nhật package.keywords"
+msgid "Update package.accept_keywords"
+msgstr "Cập nhật package.accept_keywords"
 
 #: porthole/glade/advemerge.glade.h:97
 msgid "Update package.use"
@@ -1417,12 +1417,12 @@ msgid "Advanced Emerge"
 msgstr "Cài đặt gói nâng cao"
 
 #: porthole/packagebook/summary.py:98
-msgid "Remove this arch from package.keywords"
-msgstr "Hủy bỏ kiến trúc này từ package.keywords"
+msgid "Remove this arch from package.accept_keywords"
+msgstr "Hủy bỏ kiến trúc này từ package.accept_keywords"
 
 #: porthole/packagebook/summary.py:100
-msgid "Remove ebuild keyword from package.keywords"
-msgstr "Loại khỏi package.keywords"
+msgid "Remove ebuild keyword from package.accept_keywords"
+msgstr "Loại khỏi package.accept_keywords"
 
 #: porthole/packagebook/summary.py:102
 msgid "Remask this ebuild"
@@ -1434,20 +1434,20 @@ msgstr "Hiển thị các tài sản cho ebuild này"
 
 #: porthole/packagebook/summary.py:109
 #, python-format
-msgid "Add %s to package.keywords (for this ebuild only)"
-msgstr "Thêm %s vào package.keywords (chỉ ebuild này)"
+msgid "Add %s to package.accept_keywords (for this ebuild only)"
+msgstr "Thêm %s vào package.accept_keywords (chỉ ebuild này)"
 
 #: porthole/packagebook/summary.py:111
-msgid "Add this arch to package.keywords"
-msgstr "Thêm kiến trúc này để package.keywords"
+msgid "Add this arch to package.accept_keywords"
+msgstr "Thêm kiến trúc này để package.accept_keywords"
 
 #: porthole/packagebook/summary.py:115
-msgid "Add to package.keywords (for this ebuild only)"
-msgstr "Thêm vào package.keywords (chỉ ebuild này)"
+msgid "Add to package.accept_keywords (for this ebuild only)"
+msgstr "Thêm vào package.accept_keywords (chỉ ebuild này)"
 
 #: porthole/packagebook/summary.py:116
-msgid "Add to package.keywords"
-msgstr "Thêm vào package.keywords"
+msgid "Add to package.accept_keywords"
+msgstr "Thêm vào package.accept_keywords"
 
 #: porthole/packagebook/summary.py:127
 msgid "Mask this ebuild or package"
@@ -1956,8 +1956,8 @@ msgstr "Gỡ bỏ dùng Sudo"
 #: porthole/views/menus.py:57
 #: porthole/views/depends.py:140
 #, python-format
-msgid "Append with %s to package.keywords"
-msgstr "Thêm %s vào package.keywords"
+msgid "Append with %s to package.accept_keywords"
+msgstr "Thêm %s vào package.accept_keywords"
 
 #: porthole/views/package.py:80
 #: porthole/views/menus.py:59

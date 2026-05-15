@@ -47,7 +47,7 @@ msgstr "  |__"
 # I just copied and pated a translation for an example, I know it is the wrong translation :)
 # eg:
 # " --buildpkg (-b)\n
-# Salva le modifiche della Use Flag sul tuo file package.keywords. I cambiamenti riguarderanno solamente QUESTO PACCHETTO"
+# Salva le modifiche della Use Flag sul tuo file package.accept_keywords. I cambiamenti riguarderanno solamente QUESTO PACCHETTO"
 #: porthole/glade/advemerge.glade.h:2
 #, fuzzy
 msgid ""
@@ -372,8 +372,8 @@ msgid "<b>Package Options</b>"
 msgstr "<b> Opzioni Pacchetto</b>"
 
 #: porthole/glade/advemerge.glade.h:90
-msgid "Add the selected keyword to your package.keywords file. Changes will affect THIS VERSION only."
-msgstr "Aggiungi la keyword selezionata al tuo file package.keywords. I cambiamenti riguarderanno solamente QUESTA VERSIONE."
+msgid "Add the selected keyword to your package.accept_keywords file. Changes will affect THIS VERSION only."
+msgstr "Aggiungi la keyword selezionata al tuo file package.accept_keywords. I cambiamenti riguarderanno solamente QUESTA VERSIONE."
 
 #: porthole/glade/advemerge.glade.h:91
 msgid "Command Preview Window"
@@ -385,7 +385,7 @@ msgstr "Salva le modifiche della Variabile USE sul tuo file make.conf. I cambiam
 
 #: porthole/glade/advemerge.glade.h:93
 msgid "Commit Use Flag modifications to your package.use file. Changes will affect THIS PACKAGE only."
-msgstr "Salva le modifiche della Variabile USE sul tuo file package.keywords. I cambiamenti riguarderanno solamente QUESTO PACCHETTO."
+msgstr "Salva le modifiche della Variabile USE sul tuo file package.accept_keywords. I cambiamenti riguarderanno solamente QUESTO PACCHETTO."
 
 #: porthole/glade/advemerge.glade.h:94
 msgid "Keyword to accept"
@@ -396,8 +396,8 @@ msgid "Update make.conf"
 msgstr "Aggiorna  make.conf"
 
 #: porthole/glade/advemerge.glade.h:96
-msgid "Update package.keywords"
-msgstr "Aggiorna package.keywords"
+msgid "Update package.accept_keywords"
+msgstr "Aggiorna package.accept_keywords"
 
 #: porthole/glade/advemerge.glade.h:97
 msgid "Update package.use"
@@ -1460,12 +1460,12 @@ msgid "Advanced Emerge"
 msgstr "Installazione Avanzata del Pacchetto"
 
 #: porthole/packagebook/summary.py:98
-msgid "Remove this arch from package.keywords"
-msgstr "Rimuovi questo \"arch\" di package.keywords"
+msgid "Remove this arch from package.accept_keywords"
+msgstr "Rimuovi questo \"arch\" di package.accept_keywords"
 
 #: porthole/packagebook/summary.py:100
-msgid "Remove ebuild keyword from package.keywords"
-msgstr "Rimuovi l'ebuild keyword dalle package.keywords"
+msgid "Remove ebuild keyword from package.accept_keywords"
+msgstr "Rimuovi l'ebuild keyword dalle package.accept_keywords"
 
 #: porthole/packagebook/summary.py:102
 msgid "Remask this ebuild"
@@ -1477,20 +1477,20 @@ msgstr "Guarda le proprietà per questo ebuild"
 
 #: porthole/packagebook/summary.py:109
 #, python-format
-msgid "Add %s to package.keywords (for this ebuild only)"
-msgstr "Aggiungi %s alle package.keywords (solamente per questo ebuild)"
+msgid "Add %s to package.accept_keywords (for this ebuild only)"
+msgstr "Aggiungi %s alle package.accept_keywords (solamente per questo ebuild)"
 
 #: porthole/packagebook/summary.py:111
-msgid "Add this arch to package.keywords"
-msgstr "Aggiungi questo \"arch\" di package.keywords"
+msgid "Add this arch to package.accept_keywords"
+msgstr "Aggiungi questo \"arch\" di package.accept_keywords"
 
 #: porthole/packagebook/summary.py:115
-msgid "Add to package.keywords (for this ebuild only)"
-msgstr "Aggiungi alle package.keywords (solamente per questo ebuild)"
+msgid "Add to package.accept_keywords (for this ebuild only)"
+msgstr "Aggiungi alle package.accept_keywords (solamente per questo ebuild)"
 
 #: porthole/packagebook/summary.py:116
-msgid "Add to package.keywords"
-msgstr "Aggiungi alle package.keywords"
+msgid "Add to package.accept_keywords"
+msgstr "Aggiungi alle package.accept_keywords"
 
 #: porthole/packagebook/summary.py:127
 msgid "Mask this ebuild or package"
@@ -2001,8 +2001,8 @@ msgstr "Sudo Disinstalla"
 #: porthole/views/menus.py:57
 #: porthole/views/depends.py:140
 #, python-format
-msgid "Append with %s to package.keywords"
-msgstr "Aggiungi con %s alle package.keywords"
+msgid "Append with %s to package.accept_keywords"
+msgstr "Aggiungi con %s alle package.accept_keywords"
 
 #: porthole/views/package.py:80
 #: porthole/views/menus.py:59

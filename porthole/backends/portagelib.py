@@ -30,8 +30,11 @@ IMPORT_DONE = False
 import datetime
 _id = datetime.datetime.now().microsecond
 print("PORTAGELIB: id initialized to ", _id)
-import imp
+import importlib
+import importlib.util
+import importlib.machinery
 import os
+
 
 from gettext import gettext as _
 from sys import exit, stderr
@@ -42,7 +45,7 @@ import _thread
 IMPORT_DONE = False
 
 from porthole.utils import debug
-from porthole.utils.utils import  is_root
+from porthole.utils.utils import is_root
 from porthole.utils.dispatcher import (
     Dispatcher,
     Dispatch_wait
@@ -188,7 +191,7 @@ def get_virtuals():
 def reload_portage():
     debug.dprint('PORTAGELIB: reloading portage')
     debug.dprint("PORTAGELIB: old portage version = " + portage.VERSION)
-    imp.reload(portage)
+    importlib.reload(portage)
     debug.dprint("PORTAGELIB: new portage version = " + portage.VERSION)
     settings.reset()
 
@@ -867,4 +870,3 @@ dispatch_wait = Dispatch_wait(call_waiting)
 ##polibkeys.sort()
 ##for polibkey in polibkeys:
 ##    print polibkey, ':', UseFlagDict[polibkey]
-

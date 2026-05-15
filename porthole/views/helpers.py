@@ -47,7 +47,7 @@ def add_keyword(self, widget):
     def callback():
         global mainwindow_callback
         mainwindow_callback("refresh")
-    backends.portage_lib.set_user_config('package.keywords', name=name, add=arch, callback=callback)
+    backends.portage_lib.set_user_config('package.accept_keywords', name=name, add=arch, callback=callback)
     #package = utils.get_treeview_selection(self,2)
     #package.best_ebuild = package.get_latest_ebuild()
     #mainwindow_callback("refresh")

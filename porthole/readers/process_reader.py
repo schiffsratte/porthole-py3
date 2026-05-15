@@ -25,7 +25,10 @@
 import os
 import threading
 import time
+import codecs
 
+import gi
+gi.require_version("Gdk", "3.0")
 from gi.repository import Gdk
 
 from porthole.utils import debug
@@ -52,7 +55,13 @@ class ProcessOutputReader(threading.Thread):
         self.record_output = True
         self.dprint_output = dprint_output
         self.dprint_string = ''
+        self.decoder = codecs.getincrementaldecoder('utf-8')(errors='replace')
         self.die = False
+
+    def decode_output(self, chunk, final=False):
+        if isinstance(chunk, str):
+            return chunk
+        return self.decoder.decode(chunk, final=final)
 
     def run(self):
         """ Watch for process output """
@@ -88,6 +97,9 @@ class ProcessOutputReader(threading.Thread):
                         # maybe the process died?
                         char = None
                 if char:
+                    text = self.decode_output(char)
+                    if not text:
+                        continue
                     # if the string is currently being accessed
                     while(self.string_locked):
                         # wait 50 ms and check again
@@ -96,15 +108,23 @@ class ProcessOutputReader(threading.Thread):
                         # lock the string
                         self.string_locked = True
                         # add the character to the string
-                        self.string += char.decode(encoding="utf-8", errors="replace")
+                        self.string += text
                         # unlock the string
                         self.string_locked = False
                     if self.dprint_output:
-                       self.dprint_string += char
-                       if char == '\n':
+                       self.dprint_string += text
+                       if text == '\n':
                            debug.dprint(self.dprint_output + self.dprint_string[:-1])
                            self.dprint_string = ''
                 else:
+                    text = self.decode_output(b'', final=True)
+                    if text and self.record_output:
+                        while(self.string_locked):
+                            time.sleep(0.05)
+                        self.string_locked = True
+                        self.string += text
+                        self.string_locked = False
+                    self.decoder.reset()
                     # clean up, process is terminated
                     self.process_running = False
                     while self.string != "":
@@ -122,4 +142,3 @@ class ProcessOutputReader(threading.Thread):
                 if time:
                     time.sleep(.5)
         # quit thread
-

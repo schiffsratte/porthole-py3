@@ -21,11 +21,12 @@
 from gettext import gettext as _
 import os
 
-#version = "0.6.1"
+version = "20260515-r1"
 
-copyright = _("Copyright (c) 2003 - 2020")
+copyright = _("Copyright (c) 2003 - 2023\n"
+              "Python 3.12 version 2026 by jw <jens@2910.eu> (WIP, use at your own risk)")
 
-version ="git-"
+#version ="git-"
 
 ver_info = {}
 

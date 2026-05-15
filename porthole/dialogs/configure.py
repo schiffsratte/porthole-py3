@@ -22,6 +22,7 @@
 '''
 
 import gi; gi.require_version("Gtk", "3.0") # make sure we have the right version
+import gi.repository
 from gi.repository import Gtk
 from gi.repository import Gdk
 
@@ -45,7 +46,7 @@ class ConfigDialog:
 
         # register callbacks
         callbacks = {
-            "on_config_response" : self.on_config_response,
+            "on_config_response" : [self.on_config_response,Gtk.ResponseType.OK],
             "on_color_set" : self.on_color_set,
             "on_color_clicked" : self.on_color_clicked,
             "on_enable_archlist_toggled" : self.toggle_archlist,
@@ -308,7 +309,7 @@ class ConfigDialog:
                 widget.set_text(command)
             # fixme needs porting
             #if not config.Prefs.globals.use_custom_browser:
-            #    self.wtree.get_object('custom_browser_table').set_sensitive(False)
+                #self.wtree.get_object('custom_browser_table').set_sensitive(False)
 
         # gui su client command
         widget = self.wtree.get_object('su_client')
@@ -504,6 +505,6 @@ class ConfigDialog:
         """Toggles custom browser command sensitivity
         """
         debug.dprint("CONFIGDIALOG: toggle_browser_table()")
-        self.wtree.get_object('custom_browser_table').set_sensitive(widget.get_active())
+        #self.wtree.get_object('custom_browser_table').set_sensitive(widget.get_active())
 
 

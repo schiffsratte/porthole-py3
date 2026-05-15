@@ -337,8 +337,8 @@ msgid "<b>Package Options</b>"
 msgstr "<b>Настройки пакета</b>"
 
 #: porthole/glade/advemerge.glade.h:90
-msgid "Add the selected keyword to your package.keywords file. Changes will affect THIS VERSION only."
-msgstr "Добавить выбранное ключевое слово в файл package.keywords. Изменения затронут только ДАННУЮ ВЕРСИЮ."
+msgid "Add the selected keyword to your package.accept_keywords file. Changes will affect THIS VERSION only."
+msgstr "Добавить выбранное ключевое слово в файл package.accept_keywords. Изменения затронут только ДАННУЮ ВЕРСИЮ."
 
 #: porthole/glade/advemerge.glade.h:91
 msgid "Command Preview Window"
@@ -361,8 +361,8 @@ msgid "Update make.conf"
 msgstr "Обновить make.conf"
 
 #: porthole/glade/advemerge.glade.h:96
-msgid "Update package.keywords"
-msgstr "Обновить package.keywords"
+msgid "Update package.accept_keywords"
+msgstr "Обновить package.accept_keywords"
 
 #: porthole/glade/advemerge.glade.h:97
 msgid "Update package.use"
@@ -1415,12 +1415,12 @@ msgid "Advanced Emerge"
 msgstr "Установить пакет с продвинутыми настройками"
 
 #: porthole/packagebook/summary.py:98
-msgid "Remove this arch from package.keywords"
-msgstr "Удалить эту архитектуру package.keywords"
+msgid "Remove this arch from package.accept_keywords"
+msgstr "Удалить эту архитектуру package.accept_keywords"
 
 #: porthole/packagebook/summary.py:100
-msgid "Remove ebuild keyword from package.keywords"
-msgstr "Удалить эту Ebuild ключевому слову из файла package.keywords"
+msgid "Remove ebuild keyword from package.accept_keywords"
+msgstr "Удалить эту Ebuild ключевому слову из файла package.accept_keywords"
 
 #: porthole/packagebook/summary.py:102
 msgid "Remask this ebuild"
@@ -1432,20 +1432,20 @@ msgstr "Показать свойства для этого Ebuild"
 
 #: porthole/packagebook/summary.py:109
 #, python-format
-msgid "Add %s to package.keywords (for this ebuild only)"
-msgstr "Добавить %s в package.keywords (только для данного ebuild'а)"
+msgid "Add %s to package.accept_keywords (for this ebuild only)"
+msgstr "Добавить %s в package.accept_keywords (только для данного ebuild'а)"
 
 #: porthole/packagebook/summary.py:111
-msgid "Add this arch to package.keywords"
-msgstr "Добавить эту архитектуру для файла package.keywords"
+msgid "Add this arch to package.accept_keywords"
+msgstr "Добавить эту архитектуру для файла package.accept_keywords"
 
 #: porthole/packagebook/summary.py:115
-msgid "Add to package.keywords (for this ebuild only)"
-msgstr "Добавить к файлу package.keywords (для этого Ebuild только)"
+msgid "Add to package.accept_keywords (for this ebuild only)"
+msgstr "Добавить к файлу package.accept_keywords (для этого Ebuild только)"
 
 #: porthole/packagebook/summary.py:116
-msgid "Add to package.keywords"
-msgstr "Добавить к файлу package.keywords "
+msgid "Add to package.accept_keywords"
+msgstr "Добавить к файлу package.accept_keywords "
 
 #: porthole/packagebook/summary.py:127
 msgid "Mask this ebuild or package"
@@ -1957,8 +1957,8 @@ msgstr "Удалить, используя sudo"
 #: porthole/views/menus.py:57
 #: porthole/views/depends.py:140
 #, python-format
-msgid "Append with %s to package.keywords"
-msgstr "Добавить вместе с %s в package.keywords"
+msgid "Append with %s to package.accept_keywords"
+msgstr "Добавить вместе с %s в package.accept_keywords"
 
 #: porthole/views/package.py:80
 #: porthole/views/menus.py:59

@@ -99,9 +99,9 @@ class Summary(Gtk.TextView):
         menuitems["sudo-unmerge"].connect("activate", self.unmerge, True)
         menuitems["Advanced emerge dialog"] = Gtk.MenuItem(_("Advanced Emerge"))
         menuitems["Advanced emerge dialog"].connect("activate", self.adv_emerge)
-        menuitems["remove-keyword"] = Gtk.MenuItem(_("Remove this arch from package.keywords") )
+        menuitems["remove-keyword"] = Gtk.MenuItem(_("Remove this arch from package.accept_keywords") )
         menuitems["remove-keyword"].connect("activate", self.remove_keyword)
-        menuitems["remove-keyword-ebuild"] = Gtk.MenuItem(_("Remove ebuild keyword from package.keywords") )
+        menuitems["remove-keyword-ebuild"] = Gtk.MenuItem(_("Remove ebuild keyword from package.accept_keywords") )
         menuitems["remove-keyword-ebuild"].connect("activate", self.remove_keyword_ebuild)
         menuitems["un-package-unmask"] = Gtk.MenuItem(_("Remask this ebuild"))
         menuitems["un-package-unmask"].connect("activate", self.un_package_unmask)
@@ -110,14 +110,14 @@ class Summary(Gtk.TextView):
 
         # create keyword submenus
         if not config.Prefs.globals.enable_archlist:
-            menuitems["add-ebuild-keyword"] = Gtk.MenuItem(_("Add %s to package.keywords (for this ebuild only)" ) % self.myarch)
+            menuitems["add-ebuild-keyword"] = Gtk.MenuItem(_("Add %s to package.accept_keywords (for this ebuild only)" ) % self.myarch)
             menuitems["add-ebuild-keyword"].connect("activate", self.add_keyword_ebuild, self.myarch)
-            menuitems["add-keyword"] = Gtk.MenuItem(_("Add this arch to package.keywords") )
+            menuitems["add-keyword"] = Gtk.MenuItem(_("Add this arch to package.accept_keywords") )
             menuitems["add-keyword"].connect("activate", self.add_keyword, self.myarch)
             self.keyword_menuitems = None
         else:
-            menuitems["add-ebuild-keyword"] = Gtk.MenuItem(_("Add to package.keywords (for this ebuild only)" ) )
-            menuitems["add-keyword"] = Gtk.MenuItem(_("Add to package.keywords") )
+            menuitems["add-ebuild-keyword"] = Gtk.MenuItem(_("Add to package.accept_keywords (for this ebuild only)" ) )
+            menuitems["add-keyword"] = Gtk.MenuItem(_("Add to package.accept_keywords") )
             archlist = config.Prefs.globals.archlist
             keywordmenu = {}
             keywordmenuitems = {}
@@ -409,7 +409,7 @@ class Summary(Gtk.TextView):
                     #debug.dprint("SUMMARY: create_ebuild_table(); self.keyword_unmasked[ebuild] = " + str(self.keyword_unmasked[ebuild]))
                     if (ebuild in self.keyword_unmasked and '~' in text and
                                 ('~' + arch in self.keyword_unmasked[ebuild] or self.keyword_unmasked[ebuild] == [] )):
-                        # take account of package.keywords in text but leave colour unchanged
+                        # take account of package.accept_keywords in text but leave colour unchanged
                         text = text.replace('~', '(+)')
                     if 'profile' not in backends.portage_lib.get_masking_status(ebuild):
                         if ebuild in package_unmasked and 'M' in text:
@@ -752,8 +752,8 @@ class Summary(Gtk.TextView):
 
     def on_table_clicked(self, eventbox, event):
         debug.dprint("SUMMARY: EventBox clicked, button = " + str(event.button))
-        #debug.dprint(eventbox)
-        #debug.dprint(eventbox.get_parent())
+        debug.dprint(eventbox)
+        debug.dprint(eventbox.get_parent())
         debug.dprint([eventbox.ebuild, eventbox.arch, eventbox.text])
         if event.button == 1 and eventbox.text == 'version': # left click
             self.selected_ebuild = eventbox.ebuild
@@ -871,10 +871,10 @@ class Summary(Gtk.TextView):
                 else:
                     self.popup_menuitems["sudo-emerge"].hide()
                 self.popup_menuitems["pretend-emerge"].show()
-        self.popup_menu.popup(None, None, None, event.button, event.time)
+        self.popup_menu.popup(None, None, None, None, event.button, event.time)
         # de-select the table cell. Would be nice to leave it selected,
         # but it doesn't get de-selected when the menu is closed.
-        eventbox.emit("leave-notify-event", Gdk.Event(Gdk.LEAVE_NOTIFY))
+        #eventbox.emit("leave-notify-event", Gdk.Event(Gdk.LEAVE_NOTIFY))
         return True
 
     def on_table_mouse(self, eventbox, event):

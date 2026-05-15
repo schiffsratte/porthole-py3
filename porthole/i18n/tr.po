@@ -333,8 +333,8 @@ msgid "<b>Package Options</b>"
 msgstr "<b>Paket Seçenekleri</b>"
 
 #: porthole/glade/advemerge.glade.h:90
-msgid "Add the selected keyword to your package.keywords file. Changes will affect THIS VERSION only."
-msgstr "Seçilen anahtarı package.keywords dosyanıza ekler. Değişiklikler SADECE BU SÜRÜM için geçerli olur."
+msgid "Add the selected keyword to your package.accept_keywords file. Changes will affect THIS VERSION only."
+msgstr "Seçilen anahtarı package.accept_keywords dosyanıza ekler. Değişiklikler SADECE BU SÜRÜM için geçerli olur."
 
 #: porthole/glade/advemerge.glade.h:91
 msgid "Command Preview Window"
@@ -357,8 +357,8 @@ msgid "Update make.conf"
 msgstr "make.conf güncelle"
 
 #: porthole/glade/advemerge.glade.h:96
-msgid "Update package.keywords"
-msgstr "package.keywords güncelle"
+msgid "Update package.accept_keywords"
+msgstr "package.accept_keywords güncelle"
 
 #: porthole/glade/advemerge.glade.h:97
 msgid "Update package.use"
@@ -1368,12 +1368,12 @@ msgid "Advanced Emerge"
 msgstr "Gelişmiş Emerge Özellikleri"
 
 #: porthole/packagebook/summary.py:98
-msgid "Remove this arch from package.keywords"
-msgstr "Bu mimariyi package.keywords dosyasından kaldır"
+msgid "Remove this arch from package.accept_keywords"
+msgstr "Bu mimariyi package.accept_keywords dosyasından kaldır"
 
 #: porthole/packagebook/summary.py:100
-msgid "Remove ebuild keyword from package.keywords"
-msgstr "Ebuild anahtarını package.keywords dosyasından kaldır"
+msgid "Remove ebuild keyword from package.accept_keywords"
+msgstr "Ebuild anahtarını package.accept_keywords dosyasından kaldır"
 
 #: porthole/packagebook/summary.py:102
 msgid "Remask this ebuild"
@@ -1385,20 +1385,20 @@ msgstr "Bu ebuildin özelliklerini göster"
 
 #: porthole/packagebook/summary.py:109
 #, python-format
-msgid "Add %s to package.keywords (for this ebuild only)"
-msgstr "%s değerini package.keywords dosyasına ekle (sadece bu ebuild için)"
+msgid "Add %s to package.accept_keywords (for this ebuild only)"
+msgstr "%s değerini package.accept_keywords dosyasına ekle (sadece bu ebuild için)"
 
 #: porthole/packagebook/summary.py:111
-msgid "Add this arch to package.keywords"
-msgstr "Bu mimariyi package.keywords dosyasına ekle"
+msgid "Add this arch to package.accept_keywords"
+msgstr "Bu mimariyi package.accept_keywords dosyasına ekle"
 
 #: porthole/packagebook/summary.py:115
-msgid "Add to package.keywords (for this ebuild only)"
-msgstr "package.keywords dosyasına ekle (sadece bu ebuild için)"
+msgid "Add to package.accept_keywords (for this ebuild only)"
+msgstr "package.accept_keywords dosyasına ekle (sadece bu ebuild için)"
 
 #: porthole/packagebook/summary.py:116
-msgid "Add to package.keywords"
-msgstr "package.keywords dosyasına ekle"
+msgid "Add to package.accept_keywords"
+msgstr "package.accept_keywords dosyasına ekle"
 
 #: porthole/packagebook/summary.py:127
 msgid "Mask this ebuild or package"
@@ -1901,8 +1901,8 @@ msgstr "Sudo Unmerge"
 #: porthole/views/menus.py:57
 #: porthole/views/depends.py:138
 #, python-format
-msgid "Append with %s to package.keywords"
-msgstr "%s ile package.keywords'e ekle"
+msgid "Append with %s to package.accept_keywords"
+msgstr "%s ile package.accept_keywords'e ekle"
 
 #: porthole/views/package.py:80
 #: porthole/views/menus.py:59

@@ -113,7 +113,7 @@ not thoroughly tested yet. So back up your package.use file (usually
 <p>If you want your use flag changes to apply to all packages,
 then click on "Update make.conf". This button&nbsp;is <span style="font-style: italic;">hidden by default</span>,
 due to your make.conf file being much more complex than the package.use
-and package.keywords files, and <span style="font-style: italic;">very</span>
+and package.accept_keywords files, and <span style="font-style: italic;">very</span>
 import to the overall health of your system. so <span style="font-weight: bold; font-style: italic;">back up your
 make.conf file</span> (/etc/make.conf) before letting Porthole do
 <span style="font-style: italic;">anything at all</span>
@@ -131,9 +131,9 @@ installed with the package, and as soon as you try to update the
 packages, Portage will downgrade them to the stable versions.</p>
 <p>The recommended way to emerge an unstable package is to select
 your CPU architecture as above and then click the button labelled
-"Update package.keywords". Beware! This is not thoroughly tested
-yet. So back up your package.keywords file (usually
-/etc/portage/package.keywords) first!
+"Update package.accept_keywords". Beware! This is not thoroughly tested
+yet. So back up your package.accept_keywords file (usually
+/etc/portage/package.accept_keywords) first!
 </p>
 <div class="tipright">
 <b>TIP:</b> Use the pretend option to test your settings
@@ -153,8 +153,8 @@ settings
 and submits it to the terminal window for execution.</li>
   <li>Update package.use - commits any use flag changes to
 package.use so they're remembered for this package</li>
-  <li>Update package.keywords - commits any accept_keywords
-change to package.keywords so it's remembered for the selected version.</li>
+  <li>Update package.accept_keywords - commits any accept_keywords
+change to package.accept_keywords so it's remembered for the selected version.</li>
   <li>Update make.conf - this button is hidden by default. It
 commits any use flag changes to your make.conf file, so they're
 remembered by your system.</li>

@@ -42,7 +42,7 @@
       use flags (make.conf)
       package.use
       package.unmask
-      package.keywords
+      package.accept_keywords
       mirrorselect
       http_proxy
    Viewer for:
@@ -81,7 +81,7 @@
  ? (work in progress, system, world sets, dependencies added) Possible "newuse",
     "system", "tool chain" filters for upgrade list ?
 
- ? Somehow prompt to add packages to package.keywords if the user tries to
+ ? Somehow prompt to add packages to package.accept_keywords if the user tries to
    merge a masked package (bug [1107532]). Check dependencies also.
 
  ? Possible "uninstalled packages" view (bug [1078839])

@@ -27,7 +27,7 @@ import os
 from gettext import gettext as _
 
 #from timeit import Timer
-import imp
+import importlib
 
 try:
     import pkgcore
@@ -42,6 +42,7 @@ try:
 except ImportError:
     exit(_('Could not find pkgcore.const module.'))
 try:
+    import pkgcore.util.file as pkgcore_file
     from pkgcore.util.file import read_bash
 except ImportError:
     exit(_('Could not find pkgcore.util.file.read_bash module.'))
@@ -52,22 +53,25 @@ except ImportError:
 try:
     # still some things not yet converted so
     import portage
-    import portage_const
+    try:
+        import portage.const as portage_const
+    except ImportError:
+        import portage_const
 except ImportError:
     exit(_('Could not find portage module.\n'
          'Are you sure this is a Gentoo system?'))
 
-from utils import (
-    dprint,
+from porthole.utils.debug import dprint
+from porthole.utils.utils import (
 #    dsave,
     is_root
 )
-from sterminal import SimpleTerminal
-from dispatcher import Dispatcher
+from porthole.sterminal import SimpleTerminal
+from porthole.utils.dispatcher import Dispatcher
 from . import version_sort
 import threading
 
-if is_root: # then import some modules and run it directly
+if is_root(): # then import some modules and run it directly
     from . import set_config
 
 
@@ -120,7 +124,7 @@ def get_sets_list( filename ):
         return None
     # split the atoms from the pkg name and any trailing attributes if any
     for item in set_list:
-        parts = self.split_atom_pkg(item)
+        parts = split_atom_pkg(item)
         pkgs[parts[0]] = parts[1:]
     return pkgs
 
@@ -141,7 +145,7 @@ def split_atom_pkg( pkg ):
         version = cplist[2]
         if cplist[3] != 'r0':
             version += '-' + cplist[3]
-    return [str(cp), atoms.join(), version] # hmm ... unicode keeps appearing :(
+    return [str(cp), ''.join(atoms), version] # hmm ... unicode keeps appearing :(
 
 
 def reload_world():
@@ -152,11 +156,11 @@ def reload_world():
 
 def reload_portage():
     dprint('PKGCORE_LIB: reloading portage')
-    imp.reload(pkgcore.config)
-    imp.reload(pkgcore.const)
-    imp.reload(pkgcore.util.file.read_bash)
-    imp.reload(portage)
-    imp.reload(portage_const)
+    importlib.reload(pkgcore.config)
+    importlib.reload(pkgcore.const)
+    importlib.reload(pkgcore_file)
+    importlib.reload(portage)
+    importlib.reload(portage_const)
 
 def get_use_flag_dict():
     """ Get all the use flags and return them as a dictionary
@@ -282,7 +286,7 @@ def xmatch(*args, **kwargs):
 def get_user_config(file, name=None, ebuild=None):
     """
     Function for parsing package.use, package.mask, package.unmask
-    and package.keywords.
+    and package.accept_keywords.
 
     Returns /etc/portage/<file> as a dictionary of ebuilds, with
     dict[ebuild] = list of flags.
@@ -295,7 +299,7 @@ def get_user_config(file, name=None, ebuild=None):
     """
     dprint("PKGCORE_LIB: get_user_config('%s')" % file)
     maskfiles = ['package.mask', 'package.unmask']
-    otherfiles = ['package.use', 'package.keywords']
+    otherfiles = ['package.use', 'package.accept_keywords/package.accept_keywords']
     package_files = otherfiles + maskfiles
     if file not in package_files:
         dprint(" * PKGCORE_LIB: get_user_config(): unsupported config file '%s'" % file)
@@ -356,7 +360,7 @@ def set_user_config(prefs, file, name='', ebuild='', add='', remove='', callback
     dprint("PKGCORE_LIB: set_user_config()")
     command = ''
     maskfiles = ['package.mask', 'package.unmask']
-    otherfiles = ['package.use', 'package.keywords']
+    otherfiles = ['package.use', 'package.accept_keywords/package.accept_keywords']
     package_files = otherfiles + maskfiles
     if file not in package_files:
         dprint(" * PKGCORE_LIB: set_user_config(); unsupported config file '" + file + "'")
@@ -747,7 +751,7 @@ class Package:
         return self.latest_ebuild
 
     def get_best_ebuild(self):
-        """Return best visible ebuild (taking account of package.keywords, .mask and .unmask.
+        """Return best visible ebuild (taking account of, .mask and .unmask.
         If all ebuilds are masked for your architecture, returns ''."""
         if self.full_name == "None":
             return ''

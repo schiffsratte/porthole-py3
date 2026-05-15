@@ -137,7 +137,7 @@ class DependsView(CommonTreeView):
         #menuitems["unmerge"].connect("activate", self.unmerge)
         #menuitems["sudo-unmerge"] = Gtk.MenuItem(_("Sudo Unmerge"))
         #menuitems["sudo-unmerge"].connect("activate", self.unmerge, True)
-        menuitems["add-keyword"] = Gtk.MenuItem(_("Append with %s to package.keywords") % arch)
+        menuitems["add-keyword"] = Gtk.MenuItem(_("Append with %s to package.accept_keywords") % arch)
         menuitems["add-keyword"].connect("activate", self.add_keyword)
         #menuitems["deselect_all"] = Gtk.MenuItem(_("De-Select all"))
         #menuitems["deselect_all"].connect("activate", self.deselect_all)

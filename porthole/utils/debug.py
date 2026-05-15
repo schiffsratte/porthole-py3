@@ -70,5 +70,5 @@ def _dsave(name, item = None):
     # get home directory
     home = pwd.getpwuid(os.getuid())[5]
     # pickle it baby, yeah!
-    pickle.dump(item, open(home + "/.porthole/" + name, "w"))
-
+    with open(home + "/.porthole/" + name, "wb") as debug_file:
+        pickle.dump(item, debug_file)

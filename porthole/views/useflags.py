@@ -129,7 +129,7 @@ class UseFlagWidget(Gtk.Table):
          #base_flag = abs_flag(flag)
          if flag[0] == '+':
             if not flag[1:] in ebuild_use_flags:
-                  flaglist.append(flag)
+                  flaglist.append(flag.replace("+", ""))
          elif flag[0] == '-':
             if not flag in ebuild_use_flags:
                 flaglist.append(flag)
@@ -138,4 +138,8 @@ class UseFlagWidget(Gtk.Table):
       return flags
 
    def on_toggled(self, widget):
+      self.emit('grab-focus')
+
+   def save_use(self, widget):
+      flaglist = []
       self.emit('grab-focus')

@@ -132,7 +132,7 @@ class Package:
         return self.latest_ebuild
 
     def get_best_ebuild(self, refresh = False):
-        """Return best visible ebuild (taking account of package.keywords, .mask and .unmask.
+        """Return best visible ebuild (taking account of package.accept_keywords, .mask and .unmask.
         If all ebuilds are masked for your architecture, returns ''."""
         if self.full_name == _("None"):
             return ''
@@ -142,7 +142,7 @@ class Package:
         return self.best_ebuild
 
     def get_best_dep_ebuild(self, refresh = False):
-        """Return best visible ebuild (taking account of package.keywords, .mask and .unmask.
+        """Return best visible ebuild (taking account of package.accept_keywords, .mask and .unmask.
         If all ebuilds are masked for your architecture, returns ''."""
         if self.full_name == _("None"):
             return ''

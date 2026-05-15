@@ -1,9 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-'''
+"""
     Porthole loader module
 
-    Copyright (C) 2003 - 2008 Fredrik Arnerup, Brian Dolbec, 
+    Copyright (C) 2003 - 2008 Fredrik Arnerup, Brian Dolbec,
     Daniel G. Taylor, Wm. F. Wheeler, Tommy Iorns
 
     This program is free software; you can redistribute it and/or modify
@@ -19,5 +19,10 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
+import datetime
+import logging
+
+logger = logging.getLogger(__name__)
+logger.debug("LOADERS Package: import id initialized to %d", datetime.datetime.now().microsecond)

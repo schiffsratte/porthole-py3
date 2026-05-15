@@ -93,12 +93,18 @@ def get_sync_info():
         if data:
             try:
                 #debug.dprint("BACKENDS Utilities: get_sync_info(); trying utf_8 encoding")
-                last_sync = (str(data).decode('utf_8').encode("utf_8",'replace'))
+                if isinstance(data, bytes):
+                    last_sync = data.decode('utf_8', 'replace')
+                else:
+                    last_sync = data
                 valid_sync = True
             except:
                 try:
                     #debug.dprint("BACKENDS Utilities: get_sync_info(); trying iso-8859-1 encoding")
-                    last_sync = (str(data).decode('iso-8859-1').encode('utf_8', 'replace'))
+                    if isinstance(data, bytes):
+                        last_sync = data.decode('iso-8859-1', 'replace')
+                    else:
+                        last_sync = data
                     valid_sync = True
                 except:
                     debug.dprint("BACKENDS Utilities: get_sync_info(); Failure = unknown encoding")

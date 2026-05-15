@@ -57,10 +57,7 @@ class PluginHandler(ActionHandler):
                 #% config.Prefs.plugins.path_list)
         debug.dprint("PluginHandler: setup_plugins: plugin path: %s"
                 % config.Prefs.PLUGIN_DIR)
-        self.plugin_root_menu = Gtk.MenuItem(_("Active Plugins"))
         self.plugin_menu = Gtk.Menu()
-        self.plugin_root_menu.set_submenu(self.plugin_menu)
-        self.wtree.get_object("menubar").append(self.plugin_root_menu)
         self.plugin_manager = PluginManager(self)
         self.plugin_package_tabs = {}
         self.packagebook = None
@@ -111,9 +108,6 @@ class PluginHandler(ActionHandler):
         """adds a menu item for a plugin"""
         debug.dprint("PluginHandler: Adding new Menu Entry")
         if self.needs_plugin_menu == False:
-            #Creates plugin Menu
-            debug.dprint("PluginHandler: Enabling Plugin Menu")
-            self.plugin_root_menu.show()
             self.needs_plugin_menu = True
         new_item = Gtk.MenuItem( label )
         new_item.show()
@@ -124,8 +118,6 @@ class PluginHandler(ActionHandler):
         """just like the method name says"""
         self.plugin_menu.remove( menuitem )
         if len(self.plugin_menu.get_children()) == 0:
-            self.plugin_root_menu.hide()
             self.needs_plugin_menu = False
         del menuitem
-
 

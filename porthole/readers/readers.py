@@ -31,9 +31,9 @@ import time
 import re
 from gettext import gettext as _
 
-import utils.debug
-from sterminal import SimpleTerminal
-import backends
+from porthole import backends
+from porthole import utils
+from porthole.sterminal import SimpleTerminal
 
 
 EXCEPTION_LIST = ['.','^','$','*','+','?','(',')','\\','[',']','|','{','}']
@@ -95,7 +95,7 @@ class UpgradableListReader(CommonReader):
             self.pkg_count[key] = 0
         self.count = 0
         # command lifted fom emwrap and emwrap.sh
-        self.system_cmd = "emerge -ep --nocolor --nospinner system | cut -s -f2 -d ']'| cut -f1 -d '[' | sed 's/^[ ]\+//' | sed 's/[ ].*$//'"
+        self.system_cmd = r"emerge -ep --nocolor --nospinner system | cut -s -f2 -d ']'| cut -f1 -d '[' | sed 's/^[ ]\+//' | sed 's/[ ].*$//'"
 
 
     def run( self ):
