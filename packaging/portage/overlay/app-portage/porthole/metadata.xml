@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>jens@2910.eu</email>
+    <name>jw</name>
+  </maintainer>
+  <longdescription>
+    Porthole is a GTK frontend for Gentoo package management. This local
+    package tracks the Python 3.12 GTK3 work-in-progress version.
+  </longdescription>
+</pkgmetadata>
+
