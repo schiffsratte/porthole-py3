@@ -55,3 +55,8 @@ sudo install -Dm0644 packaging/portage/package.use/porthole \
     /etc/portage/package.use/porthole
 ```
 
+or if you still have an package.use file do as root 
+
+```sh
+ echo app-portage/porthole python_targets_python3_12 >> /etc/portage/package.use
+ ```

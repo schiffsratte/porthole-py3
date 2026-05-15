@@ -15,12 +15,13 @@ SRC_URI="${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+IUSE="pkgcore"
 RESTRICT="mirror"
 
 RDEPEND="
-	dev-python/pkgcore[${PYTHON_USEDEP}]
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
 	sys-apps/portage[${PYTHON_USEDEP}]
+	pkgcore? ( sys-apps/pkgcore )
 	x11-libs/gtk+:3[introspection]
 	x11-libs/gtksourceview:4[introspection]
 "
