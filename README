@@ -5,7 +5,8 @@ Porthole 20260515-r1
 = How to install this version of Porthole =
 ===========================================
 
-You can't use the ebuild (as it's for another version), you must install it yourself with pip.
+You can't use the ebuild from portage (as it's for another version), 
+you must install it yourself with pip or use the local ebuild with a local overlay.
 
 Porthole requires:
 >=python-3.12
