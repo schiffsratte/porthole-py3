@@ -71,3 +71,8 @@ repeat the distfile and Manifest steps:
 ```sh
 sudo rm -f /var/cache/distfiles/porthole-20260515.tar.gz
 ```
+You may need to add a line to package.accept_keywords:
+```
+# required by app-portage/porthole (argument)
+=app-portage/porthole-20260515-r1 ~amd64
+```
