@@ -15,11 +15,11 @@ VTE and GtkSourceView introspection packages
 gentoolkit
 and, of course, Portage
 
-to install:
+to install into a venv (only tested with Python 3.12) :
 > python3.12 -m pip install .
 
 For a systemwide install:
-> sudo python3.12 -m pip install .
+> use the local overlay 
 
 ====================
 Original README
@@ -42,34 +42,6 @@ To see a history of changes, please see NEWS
 We absolutely _love_ bug reports! Please use the bugtracker at
 SourceForge: http://sourceforge.net/projects/porthole/
 Also Please report the version of porthole you experienced the bug in
-
-
-===========================
-= How to install Porthole =
-===========================
-
-The easiest and recommended way of installing Porthole is by using the
-ebuild that is available from the webpage or portage tree. We assume you know how to
-put ebuilds in the portage overlay. If not, please consult the
-documentation and forums on the Gentoo web site (http://www.gentoo.org),
-or follow the instructions on the Gentoo Wiki at 
-http://gentoo-wiki.com/HOWTO_Installing_3rd_Party_Ebuilds.
-
-If you don't want to use the ebuild, you can install it yourself with pip.
-
-Porthole requires:
->=python-3.12
-PyGObject with GTK 3
-VTE and GtkSourceView introspection packages
-gentoolkit
-and, of course, Portage
-
-
-to install:
-> python3.12 -m pip install .
-
-For a systemwide install:
-> sudo python3.12 -m pip install .
 
 
 ===========
